@@ -16,7 +16,7 @@ const Navbar = () => {
   ];
 
   const portals = [
-    { name: 'Student Portal', href: '/student-portal', icon: User },
+    { name: 'Student Portal', href: '/student-access', icon: User },
     { name: 'Teacher Portal', href: '/teacher-portal', icon: Users },
     { name: 'Admin Panel', href: '/admin-panel', icon: Settings },
   ];

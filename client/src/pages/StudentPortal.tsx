@@ -1,20 +1,69 @@
-import React, { useState } from 'react';
-import { User, BookOpen, Calendar, FileText, DollarSign, Bell, Download, Clock, Star, Award } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'wouter';
+import { User, BookOpen, Calendar, FileText, DollarSign, Bell, Download, Clock, Star, Award, LogOut } from 'lucide-react';
+
+interface StudentData {
+  id: number;
+  firstName: string;
+  lastName: string;
+  rollNumber: string;
+  grade: string;
+  section: string;
+  address?: string;
+  phone?: string;
+  parentName?: string;
+  parentPhone?: string;
+  parentEmail?: string;
+}
 
 const StudentPortal = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [student, setStudent] = useState<StudentData | null>(null);
+  const [, navigate] = useLocation();
 
-  // Mock student data
+  useEffect(() => {
+    // Check if student is authenticated
+    const currentStudent = sessionStorage.getItem('currentStudent');
+    if (!currentStudent) {
+      navigate('/student-access');
+      return;
+    }
+    
+    try {
+      const studentData = JSON.parse(currentStudent);
+      setStudent(studentData);
+    } catch (error) {
+      console.error('Error parsing student data:', error);
+      navigate('/student-access');
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('currentStudent');
+    navigate('/student-access');
+  };
+
+  if (!student) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading your portal...</p>
+        </div>
+      </div>
+    );
+  }
+
   const studentData = {
-    name: 'Alex Johnson',
-    id: 'STU2024001',
-    grade: '10th Grade - Section A',
-    rollNumber: '15',
-    email: 'alex.johnson@student.educampus.edu',
-    phone: '+1 (555) 987-6543',
-    address: '456 Student Lane, Academic City, AC 12345',
-    parent: 'Michael Johnson',
-    parentPhone: '+1 (555) 123-9876'
+    name: `${student.firstName} ${student.lastName}`,
+    id: student.rollNumber,
+    grade: `${student.grade}th Grade - Section ${student.section}`,
+    rollNumber: student.rollNumber,
+    email: student.parentEmail || 'No email provided',
+    phone: student.phone || 'No phone provided',
+    address: student.address || 'No address provided',
+    parent: student.parentName || 'No parent name provided',
+    parentPhone: student.parentPhone || 'No parent phone provided'
   };
 
   const grades = [
@@ -469,6 +518,14 @@ const StudentPortal = () => {
               <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
                 <User className="h-6 w-6 text-white" />
               </div>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
+                data-testid="button-logout"
+              >
+                <LogOut className="h-4 w-4" />
+                Logout
+              </button>
             </div>
           </div>
         </div>
