@@ -35,7 +35,12 @@ const Admissions = () => {
     }
   ];
 
-  const gradeInfo = {
+  const gradeInfo: Record<string, {
+    title: string;
+    eligibility: string;
+    fees: string;
+    requirements: string[];
+  }> = {
     nursery: {
       title: 'Nursery (Age 3-4)',
       eligibility: 'Child should be 3+ years old as of March 31st',

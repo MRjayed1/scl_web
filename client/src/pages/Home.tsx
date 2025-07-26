@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'wouter';
 import { ArrowRight, BookOpen, Users, Award, Calendar, Bell, TrendingUp, MapPin } from 'lucide-react';
 
 const Home = () => {
@@ -77,13 +77,13 @@ const Home = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                to="/admissions"
+                href="/admissions"
                 className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-8 py-3 rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center"
               >
                 Apply Now <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <Link
-                to="/about"
+                href="/about"
                 className="border-2 border-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors duration-200"
               >
                 Learn More

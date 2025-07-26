@@ -4,7 +4,12 @@ import { BookOpen, Clock, Users, Award, Download, Calendar, Star } from 'lucide-
 const Academics = () => {
   const [activeTab, setActiveTab] = useState('primary');
 
-  const curricularPrograms = {
+  const curricularPrograms: Record<string, {
+    title: string;
+    description: string;
+    subjects: string[];
+    features: string[];
+  }> = {
     primary: {
       title: 'Primary School (Grades 1-5)',
       description: 'Foundation years focusing on core skills and holistic development',

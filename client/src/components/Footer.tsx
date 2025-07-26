@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'wouter';
 import { GraduationCap, MapPin, Phone, Mail, Facebook, Twitter, Instagram } from 'lucide-react';
 
 const Footer = () => {
@@ -36,11 +36,11 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/academics" className="text-gray-300 hover:text-white transition-colors">Academics</Link></li>
-              <li><Link to="/admissions" className="text-gray-300 hover:text-white transition-colors">Admissions</Link></li>
-              <li><Link to="/faculty" className="text-gray-300 hover:text-white transition-colors">Faculty</Link></li>
-              <li><Link to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link></li>
+              <li><Link href="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
+              <li><Link href="/academics" className="text-gray-300 hover:text-white transition-colors">Academics</Link></li>
+              <li><Link href="/admissions" className="text-gray-300 hover:text-white transition-colors">Admissions</Link></li>
+              <li><Link href="/faculty" className="text-gray-300 hover:text-white transition-colors">Faculty</Link></li>
+              <li><Link href="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
 
@@ -48,9 +48,9 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Portals</h3>
             <ul className="space-y-2">
-              <li><Link to="/student-portal" className="text-gray-300 hover:text-white transition-colors">Student Portal</Link></li>
-              <li><Link to="/teacher-portal" className="text-gray-300 hover:text-white transition-colors">Teacher Portal</Link></li>
-              <li><Link to="/admin-panel" className="text-gray-300 hover:text-white transition-colors">Admin Panel</Link></li>
+              <li><Link href="/student-portal" className="text-gray-300 hover:text-white transition-colors">Student Portal</Link></li>
+              <li><Link href="/teacher-portal" className="text-gray-300 hover:text-white transition-colors">Teacher Portal</Link></li>
+              <li><Link href="/admin-panel" className="text-gray-300 hover:text-white transition-colors">Admin Panel</Link></li>
             </ul>
             <div className="mt-6">
               <h4 className="text-sm font-semibold mb-2">Follow Us</h4>

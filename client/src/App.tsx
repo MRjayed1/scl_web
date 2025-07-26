@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'wouter';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -18,17 +18,17 @@ function App() {
       <div className="min-h-screen bg-gray-50">
         <Navbar />
         <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/academics" element={<Academics />} />
-            <Route path="/admissions" element={<Admissions />} />
-            <Route path="/faculty" element={<Faculty />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/student-portal" element={<StudentPortal />} />
-            <Route path="/teacher-portal" element={<TeacherPortal />} />
-            <Route path="/admin-panel" element={<AdminPanel />} />
-          </Routes>
+          <Switch>
+            <Route path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/academics" component={Academics} />
+            <Route path="/admissions" component={Admissions} />
+            <Route path="/faculty" component={Faculty} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/student-portal" component={StudentPortal} />
+            <Route path="/teacher-portal" component={TeacherPortal} />
+            <Route path="/admin-panel" component={AdminPanel} />
+          </Switch>
         </main>
         <Footer />
       </div>
