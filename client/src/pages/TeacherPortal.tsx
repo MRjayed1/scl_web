@@ -1,17 +1,65 @@
 import React, { useState } from 'react';
+import { useLocation } from 'wouter';
 import { Users, BookOpen, Calendar, FileText, BarChart3, Bell, Upload, Download, Clock, Star } from 'lucide-react';
+
+interface TeacherData {
+  id: number;
+  firstName: string;
+  lastName: string;
+  employeeId: string;
+  department: string;
+  qualification?: string;
+  experience?: number;
+  phone?: string;
+  address?: string;
+}
 
 const TeacherPortal = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [teacher, setTeacher] = useState<TeacherData | null>(null);
+  const [, navigate] = useLocation();
+
+  React.useEffect(() => {
+    // Check if teacher is authenticated
+    const currentTeacher = sessionStorage.getItem('currentTeacher');
+    if (!currentTeacher) {
+      navigate('/teacher-access');
+      return;
+    }
+    
+    try {
+      const teacherData = JSON.parse(currentTeacher);
+      setTeacher(teacherData);
+    } catch (error) {
+      console.error('Error parsing teacher data:', error);
+      navigate('/teacher-access');
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('currentTeacher');
+    navigate('/teacher-access');
+  };
+
+  if (!teacher) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-green-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading your portal...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Mock teacher data
   const teacherData = {
-    name: 'Dr. Emily Rodriguez',
-    id: 'TCH2024015',
-    department: 'English Department',
+    name: `${teacher.firstName} ${teacher.lastName}`,
+    id: teacher.employeeId,
+    department: `${teacher.department} Department`,
     subjects: ['English Literature', 'Creative Writing', 'Public Speaking'],
-    email: 'emily.rodriguez@educampus.edu',
-    phone: '+1 (555) 123-4569'
+    email: `${teacher.firstName.toLowerCase()}.${teacher.lastName.toLowerCase()}@educampus.edu`,
+    phone: teacher.phone || '+1 (555) 123-4569'
   };
 
   const classes = [
@@ -482,6 +530,13 @@ const TeacherPortal = () => {
               <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
                 <Users className="h-6 w-6 text-white" />
               </div>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
+                data-testid="button-logout"
+              >
+                Logout
+              </button>
             </div>
           </div>
         </div>

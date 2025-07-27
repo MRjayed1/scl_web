@@ -10,6 +10,7 @@ import Faculty from './pages/Faculty';
 import Contact from './pages/Contact';
 import StudentAccess from './pages/StudentAccess';
 import StudentPortal from './pages/StudentPortal';
+import TeacherAccess from './pages/TeacherAccess';
 import TeacherPortal from './pages/TeacherPortal';
 import AdminPanel from './pages/AdminPanel';
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/contact" component={Contact} />
             <Route path="/student-access" component={StudentAccess} />
             <Route path="/student-portal" component={StudentPortal} />
+            <Route path="/teacher-access" component={TeacherAccess} />
             <Route path="/teacher-portal" component={TeacherPortal} />
             <Route path="/admin-panel" component={AdminPanel} />
           </Switch>
